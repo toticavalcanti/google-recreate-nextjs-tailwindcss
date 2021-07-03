@@ -1,11 +1,26 @@
 import Head from 'next/head'
 import Avatar from '../components/Avatar';
-import Footer from '../components/Footer';
 import {MicrophoneIcon, ViewGridIcon} from '@heroicons/react/solid';
 import { SearchIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
+import Footer from '../components/Footer';
+import { useRef } from 'react';
+import { useRouter } from 'next/router'
 
 export default function Home() {
+  const router = useRouter();
+  const searchInputRef = useRef(null);
+  
+  const search = (e) => {
+    e.preventDefault()
+    const term = searchInputRef.current.value;
+
+    if(term){
+      router.push(`/search?term=${term}`);
+    }
+    return;
+  }; 
+
   return (
     //This div className is reponsable to put Footer at down page
     <div className="flex flex-col justify-center h-screen">
@@ -52,14 +67,18 @@ export default function Home() {
         max-w-md rounded-full border border-gray-200 px-5 py-3 items-center 
         sm:max-w-xl lg:max-w-2xl"> 
           <SearchIcon className="h-5 mr-3 text-gray-500" />
-          <input type="text" className="flex-grow focus:outline-none" />
+          <input 
+            ref={searchInputRef} 
+            type="text" 
+            className="flex-grow focus:outline-none" 
+          />
           <MicrophoneIcon className="h-5"/>
         </div>
 
         <div className="flex flex-col w-1/2 space-y-2 justify-center mt-8 sm:space-y-0
         sm:flex-row sm:space-x-4">
-          <button className="btn">Google Search</button>
-          <button className="btn">i'm Felling Lucky</button>
+          <button onClick={search} className="btn">Google Search</button>
+          <button onClick={search} className="btn">i'm Felling Lucky</button>
         </div>
 
       </form>
