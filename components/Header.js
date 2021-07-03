@@ -35,7 +35,7 @@ function Header(){
         border-gray-200 rounded-full shadow-lg max-w-3xl items-center">
           <input 
             ref={ searchInputRef } 
-            className="flex-grow w-full focus:outlinenone" 
+            className="flex-grow w-full focus:outline-none" 
             type="text" 
           />
           <XIcon 
